@@ -45,6 +45,11 @@ public class Table {
         return cell.getText();
     }
 
+    public String getValueFromCell(int rowNumber, String columnName) {
+        List<Map<String, WebElement>> rowsWithColunmsByHeadings = getRowsWithColumnsByHeadings();
+        return rowsWithColunmsByHeadings.get(rowNumber -1).get(columnName).getText();
+    }
+
     public List<Map<String, WebElement>> getRowsWithColumnsByHeadings(){
 
         List<List<WebElement>> rowsWithColumns = getRowsWithColumns();

@@ -3,7 +3,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
@@ -40,14 +39,15 @@ public class Main {
         System.out.println(driver.findElement(By.xpath("//*[@id='ooui-1']")).getAttribute("value"));
         driver.findElement(By.xpath("//*[@id='ooui-1']")).clear();*/
 
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        WebElement tableElement = driver.findElement(By.xpath("//table[@id=\"customers\"]"));
 
-        driver.get("https://market.yandex.ru/catalog/54965/list?hid=90594&track=fr_ctlg&local-offers-first=0&deliveryincluded=0&onstock=1");
-        List<WebElement> checkboxes = driver
-                .findElements(By.xpath("//div[@class=\"n-filter-panel-aside__content\"]/div[4]//span[@class=\"checkbox__box\"]"));
-//        checkboxes.get(3).click();
-        for (WebElement checkbox : checkboxes){
-            checkbox.click();
-        }
+        Table table = new Table(tableElement, driver);
+        System.out.println("Rows number " + table.getRows().size());
+        System.out.println(table.getValueFromCell(2, 3));
+        System.out.println(table.getValueFromCell(4, "Company"));
+
+
 //        driver.quit();
 
     }

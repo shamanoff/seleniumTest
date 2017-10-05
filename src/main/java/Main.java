@@ -1,11 +1,14 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Main {
+
+    static WebDriver driver;
+
+    static WebDriverWait wait = (new WebDriverWait( driver, 5));
 
     public static void main(String[] args) {
         System.setProperty("webdriver.gecko.driver",
@@ -14,9 +17,16 @@ public class Main {
 
         WebDriver driver = new FirefoxDriver();
 //        will wait for elements
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         driver.manage().window().maximize();
 //        driver.manage().window().setSize(new Dimension(900, 900));
+
+//        явное ожиднание
+        driver.get("https://accounts.google.com/SignUp?continue=https%3A%2F%2Fwww.google.com%2F%3Fgfe_rd%3Dcr%26dcr%3D0%26ei%3DQijWWae-OY2CaNynv6gH%26gws_rd%3Dcr%26fg%3D1&hl=en");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(), 'Create your Google Account')]")));
+
+
 
      /*   driver.get("https://en.wikipedia.org/wiki/Main_Page");
         WebElement link = driver.findElement(By.linkText("Log in"));
@@ -39,16 +49,25 @@ public class Main {
         System.out.println(driver.findElement(By.xpath("//*[@id='ooui-1']")).getAttribute("value"));
         driver.findElement(By.xpath("//*[@id='ooui-1']")).clear();*/
 
-        driver.get("https://www.w3schools.com/html/html_tables.asp");
+/*        driver.get("https://www.w3schools.com/html/html_tables.asp");
         WebElement tableElement = driver.findElement(By.xpath("//table[@id=\"customers\"]"));
 
         Table table = new Table(tableElement, driver);
         System.out.println("Rows number " + table.getRows().size());
         System.out.println(table.getValueFromCell(2, 3));
-        System.out.println(table.getValueFromCell(4, "Company"));
+        System.out.println(table.getValueFromCell(4, "Company"));*/
 
 
 //        driver.quit();
+
+    }
+    public static void selectOption(String listName, String option){
+        String listXpath = String.format("(//strong[text()='%s']/following-siblings::div/div[@role='listbox'])[1]", listName);
+        String optionXpath = String.format("//div[text()='%s']/parent::div[@role='option']", option);
+        driver.findElement(By.xpath(listXpath)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(optionXpath)));
+        driver.findElement(By.xpath(optionXpath)).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(optionXpath)));
 
     }
 }

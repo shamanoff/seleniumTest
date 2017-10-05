@@ -1,15 +1,17 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     public static void main(String[] args) {
         System.setProperty("webdriver.gecko.driver",
-//                "D:\\java projects\\03 10 17\\seleniumTest\\src\\drivers\\geckodriver.exe");
-                "C:\\Users\\michaelb\\projects\\java_projects\\seleniumTest\\src\\drivers\\geckodriver.exe");
+               "D:\\java projects\\03 10 17\\seleniumTest\\src\\drivers\\geckodriver.exe");
+//                 "C:\\Users\\michaelb\\projects\\java_projects\\seleniumTest\\src\\drivers\\geckodriver.exe");
 
         WebDriver driver = new FirefoxDriver();
 //        will wait for elements
@@ -31,14 +33,22 @@ public class Main {
         }else System.out.println("Fail");
         button.submit();*/
 
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
+  /*      driver.get("https://en.wikipedia.org/wiki/Main_Page");
         driver.findElement(By.xpath("//input[@id='searchInput']"))
                 .sendKeys("Selenium WebDriver");
         driver.findElement(By.xpath("//input[@id='searchButton']")).click();
         System.out.println(driver.findElement(By.xpath("//*[@id='ooui-1']")).getAttribute("value"));
-        driver.findElement(By.xpath("//*[@id='ooui-1']")).clear();
+        driver.findElement(By.xpath("//*[@id='ooui-1']")).clear();*/
 
-        driver.quit();
+
+        driver.get("https://market.yandex.ru/catalog/54965/list?hid=90594&track=fr_ctlg&local-offers-first=0&deliveryincluded=0&onstock=1");
+        List<WebElement> checkboxes = driver
+                .findElements(By.xpath("//div[@class=\"n-filter-panel-aside__content\"]/div[4]//span[@class=\"checkbox__box\"]"));
+//        checkboxes.get(3).click();
+        for (WebElement checkbox : checkboxes){
+            checkbox.click();
+        }
+//        driver.quit();
 
     }
 }

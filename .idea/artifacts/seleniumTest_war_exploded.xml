@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="seleniumTest:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/seleniumTest_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="seleniumTest/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="seleniumTest" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

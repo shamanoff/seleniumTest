@@ -20,4 +20,23 @@ public class MainClassTest {
     //выполняется самым последним после всех методов
     @AfterClass
     public void afterClassMethod(){}
+
+    @Test
+    public void method3() {
+        Assert.assertTrue("Values are not equal!", 1 + 1 == 2);
+    }
+
+    @Test
+    public void method4(){
+        Assert.assertEquals(20, 5 + 5);
+    }
+    @Test
+    public void method5() {
+        Assert.assertFalse("Values are equal!",1 + 1 == 2);
+    }
+
+    @Test
+    public void method6(){
+        Assert.assertNotEquals(20, 5 + 5);
+    }
 }
